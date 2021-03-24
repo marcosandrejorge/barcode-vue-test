@@ -2,7 +2,9 @@
   <div class="text-center">
     <v-form>
       <v-container>
-        <div class="d-flex flex-column justify-space-between align-center mb-10">
+        <div
+          class="d-flex flex-column justify-space-between align-center mb-10"
+        >
           <v-img
             src="../assets/logo.jpg"
             width="200px"
@@ -18,12 +20,22 @@
             disabled
           ></v-text-field>
         </v-row>
-        <v-btn color="primary" dark v-if="!lerCodigo" @click="lerCodigo = true">
+        <v-btn color="primary" dark v-if="!lerCodigo" @click="lerCodigoBarra">
           Ler código de barras
         </v-btn>
 
         <div>
-          <StreamBarcodeReader v-if="lerCodigo" @decode="onDecode" />
+          <v-progress-circular
+            indeterminate
+            :width="7"
+            color="primary"
+            v-if="loading"
+          ></v-progress-circular>
+          <StreamBarcodeReader
+            v-if="lerCodigo"
+            @decode="onDecode"
+            @loaded="loading = false"
+          />
         </div>
       </v-container>
     </v-form>
@@ -40,8 +52,13 @@ export default {
   data: () => ({
     result: "",
     lerCodigo: false,
+    loading: false,
   }),
   methods: {
+    lerCodigoBarra() {
+      this.lerCodigo = true;
+      this.loading = true;
+    },
     onDecode(result) {
       this.result = result;
       this.lerCodigo = false;
