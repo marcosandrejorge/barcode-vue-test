@@ -1,6 +1,9 @@
 <template>
   <div>
     <StreamBarcodeReader @decode="onDecode" @loaded="onLoaded"/>
+    <p>
+      {{result}}
+    </p>
   </div>
 </template>
 
@@ -11,10 +14,13 @@ export default {
   components: {
     StreamBarcodeReader,
   },
+  data:()=>({
+    result: "",
+  }),
   methods: {
     onDecode(result) {
       console.log('Código:',result);
-      alert(result);
+      this.result = result;
     },
     onLoaded(teste) {
       console.log(teste);
