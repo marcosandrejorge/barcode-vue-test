@@ -28,6 +28,7 @@
           <v-progress-circular
             indeterminate
             :width="7"
+            :size="70"
             color="primary"
             v-if="loading"
           ></v-progress-circular>
