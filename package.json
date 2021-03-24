@@ -10,7 +10,7 @@
     "core-js": "^3.6.5",
     "register-service-worker": "^1.7.1",
     "vue": "^2.6.11",
-    "vue-barcode-scanner": "^0.8.1",
+    "vue-barcode-reader": "0.0.3",
     "vue-router": "^3.2.0"
   },
   "devDependencies": {

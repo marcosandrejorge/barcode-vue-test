@@ -1,43 +1,23 @@
 <template>
   <div>
-    <p>{{loading}}</p>
+    <StreamBarcodeReader @decode="onDecode" @loaded="onLoaded"/>
   </div>
 </template>
 
 <script>
+import { StreamBarcodeReader } from "vue-barcode-reader";
+
 export default {
-  data: () => ({
-    loading: false,
-  }),
-  created() {
-    // Pass an options object with `eventBus: true` to receive an eventBus back
-    // which emits `start` and `finish` events
-    const eventBus = this.$barcodeScanner.init(this.onBarcodeScanned, {
-      eventBus: true,
-    });
-    if (eventBus) {
-      eventBus.$on("start", () => {
-        this.loading = true;
-      });
-      eventBus.$on("finish", () => {
-        this.loading = false;
-      });
-    }
-  },
-  destroyed() {
-    // Remove listener when component is destroyed
-    this.$barcodeScanner.destroy();
+  components: {
+    StreamBarcodeReader,
   },
   methods: {
-    // Create callback function to receive barcode when the scanner is already done
-    onBarcodeScanned(barcode) {
-      console.log(barcode);
-      // do something...
+    onDecode(result) {
+      console.log('Código:',result);
+      alert(result);
     },
-    // Reset to the last barcode before hitting enter (whatever anything in the input box)
-    resetBarcode() {
-      let barcode = this.$barcodeScanner.getPreviousCode();
-      // do something...
+    onLoaded(teste) {
+      console.log(teste);
     },
   },
 };
