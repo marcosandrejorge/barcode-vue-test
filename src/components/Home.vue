@@ -2,6 +2,15 @@
   <div class="text-center">
     <v-form>
       <v-container>
+        <div class="d-flex flex-column justify-space-between align-center mb-10">
+          <v-img
+            src="../assets/logo.jpg"
+            width="200px"
+            aspect-ratio="2"
+            contain
+          ></v-img>
+        </div>
+
         <v-row v-if="!lerCodigo && result !== ''" justify="center">
           <v-text-field
             :value="result"
