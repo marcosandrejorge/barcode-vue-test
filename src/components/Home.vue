@@ -1,9 +1,23 @@
 <template>
-  <div>
-    <StreamBarcodeReader @decode="onDecode" @loaded="onLoaded"/>
-    <p>
-      {{result}}
-    </p>
+  <div class="text-center">
+    <v-form>
+      <v-container>
+        <v-row v-if="!lerCodigo && result !== ''" justify="center">
+          <v-text-field
+            :value="result"
+            label="Código de barras"
+            disabled
+          ></v-text-field>
+        </v-row>
+        <v-btn color="primary" dark v-if="!lerCodigo" @click="lerCodigo = true">
+          Ler código de barras
+        </v-btn>
+
+        <div>
+          <StreamBarcodeReader v-if="lerCodigo" @decode="onDecode" />
+        </div>
+      </v-container>
+    </v-form>
   </div>
 </template>
 
@@ -14,16 +28,14 @@ export default {
   components: {
     StreamBarcodeReader,
   },
-  data:()=>({
-    result: "Nada",
+  data: () => ({
+    result: "",
+    lerCodigo: false,
   }),
   methods: {
     onDecode(result) {
-      console.log('Código:',result);
       this.result = result;
-    },
-    onLoaded(teste) {
-      console.log(teste);
+      this.lerCodigo = false;
     },
   },
 };
