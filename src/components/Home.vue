@@ -15,7 +15,7 @@ export default {
     StreamBarcodeReader,
   },
   data:()=>({
-    result: "",
+    result: "Nada",
   }),
   methods: {
     onDecode(result) {
